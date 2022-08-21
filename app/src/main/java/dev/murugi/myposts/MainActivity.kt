@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
                  if (response.isSuccessful){
                      var posts = response.body()
                      Toast.makeText(baseContext, "fetched ${posts!!.size} posts", Toast.LENGTH_LONG).show()
-                     binding.rvPosts.layoutManager = LinearLayoutManager(baseContext)
-                     binding.rvPosts.adapter = PostsRvAdapter(baseContext,posts)
+                     binding.rvPost.layoutManager = LinearLayoutManager(baseContext)
+                     binding.rvPost.adapter = PostsRvAdapter(posts)
                  }
             }
 

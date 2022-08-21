@@ -1,15 +1,16 @@
 package dev.murugi.myposts
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.murugi.myposts.databinding.PostListItemBinding
 
-class PostsRvAdapter(var context: Context, var postList:List<Post>): RecyclerView.Adapter<PostsViewHolder>() {
+class PostsRvAdapter(var postList:List<Post>): RecyclerView.Adapter<PostsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
         var binding = PostListItemBinding
-            .inflate(LayoutInflater.from(context),parent,false)
+            .inflate(LayoutInflater.from(parent.context),parent,false)
         return PostsViewHolder(binding)
     }
 
@@ -20,6 +21,12 @@ class PostsRvAdapter(var context: Context, var postList:List<Post>): RecyclerVie
             tvId.text = currentPost.id.toString()
             tvTitle.text = currentPost.title
             tvBody.text = currentPost.body
+            val context = holder.itemView.context
+            holder.binding.cvPosts.setOnClickListener {
+                val intent = Intent(context, CommentsActivity::class.java)
+                intent.putExtra("POST_ID", currentPost.id)
+                context.startActivity(intent)
+            }
         }
     }
 
